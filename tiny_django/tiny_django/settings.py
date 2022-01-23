@@ -15,8 +15,6 @@ DEBUG = True
 
 ROOT_URLCONF = __name__
 
-WSGI_APPLICATION = "tiny_django.wsgi.application"
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -33,7 +31,9 @@ from django.urls import re_path
 
 
 def home(request):
-    return HttpResponse("Welcome to the Tinyapp's Homepage!", content_type="text/plain")
+    return HttpResponse(
+        f"Welcome to the {__name__}'s Homepage!", content_type="text/plain"
+    )
 
 
 urlpatterns = [
