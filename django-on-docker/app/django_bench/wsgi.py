@@ -1,5 +1,5 @@
 """
-WSGI config for tiny_django project.
+WSGI config for django_bench project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiny_django.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_bench.settings")
 
 application = get_wsgi_application()
