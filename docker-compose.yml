@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  web_django:
+    build:
+      context: ./
+      target: web_django
+    labels:
+      com.dnsdock.image: "web-django"
+      com.dnsdock.region: "mintel"
+    command: gunicorn django_bench.wsgi:application --bind 0.0.0.0:8000 -w 4
+    volumes:
+      - ./django-on-docker/app/:/usr/src/app/
+      - ./unsamples/:/images
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+
+
+  web_fastapi:
+    build:
+      context: ./
+      target: web_fastapi
+    labels:
+      com.dnsdock.image: "web-fastapi"
+      com.dnsdock.region: "mintel"
+    command: gunicorn --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:9000 app.main:app
+    volumes:
+      - ./fastapi-on-docker/:/usr/src/app/
+      - ./unsamples/:/images
+    ports:
+      - 9000:9000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=mintel_user
+      - POSTGRES_PASSWORD=hello_mintel
+      - POSTGRES_DB=mintel_dev
+
+volumes:
+  postgres_data:
