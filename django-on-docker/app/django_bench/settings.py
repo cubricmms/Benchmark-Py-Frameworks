@@ -126,3 +126,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+IMAGES_FOLDER = "/images"
+IMAGES_OUT_FOLDER = f'{IMAGES_FOLDER}/output'
+Path(IMAGES_OUT_FOLDER).mkdir(parents=True, exist_ok=True)

@@ -9,9 +9,13 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 imagemagick dependencies
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev file imagemagick \
+    && apk add imagemagick \
+            gcc \
+            python3-dev \
+            libc-dev \
+            libffi-dev \
     && rm -rf /var/cache/apk/*
 
 ##############################
@@ -22,10 +26,10 @@ FROM base as builder
 # install dependencies
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
+ENV PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
 
-RUN pip install --upgrade pip
 COPY ./requirements.txt .
-RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 ##############################
 ### Django Image
@@ -40,3 +44,16 @@ WORKDIR /usr/src/app
 
 # copy project
 COPY ./django-on-docker .
+
+##############################
+### Fast API Image
+##############################
+FROM base as web_fastapi
+
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY --from=builder /opt/venv /opt/venv
+
+WORKDIR /usr/src/app
+
+COPY ./fastapi-on-docker .
