@@ -601,9 +601,9 @@ urllib3==1.26.9; python_version >= "3.6" and python_full_version < "3.0.0" or py
 uvicorn==0.17.6; python_version >= "3.7" \
     --hash=sha256:19e2a0e96c9ac5581c01eb1a79a7d2f72bb479691acd2b8921fce48ed5b961a6 \
     --hash=sha256:5180f9d059611747d841a4a4c4ab675edf54c8489e97f96d0583ee90ac3bfc23
-werkzeug==2.1.1; python_version >= "3.7" \
-    --hash=sha256:3c5493ece8268fecdcdc9c0b112211acd006354723b280d643ec732b6d4063d6 \
-    --hash=sha256:f8e89a20aeabbe8a893c24a461d3ee5dad2123b05cc6abd73ceed01d39c3ae74
+werkzeug==2.2.3; python_version >= "3.7" \
+    --hash=sha256:2e1ccc9417d4da358b9de6f174e3ac094391ea1d4fbef2d667865d819dfd0afe \
+    --hash=sha256:56433961bc1f12533306c624f3be5e744389ac61d722175d543e1751285da612
 zipp==3.8.0; python_version < "3.10" and python_version >= "3.7" \
     --hash=sha256:c4f6e5bbf48e74f7a38e7cc5b0480ff42b0ae5178957d564d18932525d5cf099 \
     --hash=sha256:56bf8aadb83c24db6c4b577e13de374ccfb67da2078beba1d037c17980bf43ad
